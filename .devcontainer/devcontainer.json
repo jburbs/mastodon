@@ -1,15 +1,14 @@
 {
-  "name": "Mastodon on local machine",
-  "dockerComposeFile": "compose.yaml",
-  "service": "app",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-
+  "name": "Mastodon Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/ruby:3",
   "features": {
-    "ghcr.io/devcontainers/features/sshd:1": {}
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/postgres:1": {},
+    "ghcr.io/devcontainers/features/redis:1": {}
   },
-
   "forwardPorts": [3000, 4000],
-
   "portsAttributes": {
     "3000": {
       "label": "web",
@@ -22,17 +21,11 @@
       "requireLocalPort": true
     }
   },
-
+  "postCreateCommand": "apt-get update && apt-get install -y libpq-dev libicu-dev libidn11-dev libprotobuf-dev protobuf-compiler ffmpeg imagemagick libmagickwand-dev libmagic-dev libxml2-dev libxslt1-dev && bundle install && npm install -g yarn && yarn install",
   "remoteUser": "vscode",
-
   "otherPortsAttributes": {
     "onAutoForward": "silent"
   },
-
-  "onCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
-  "postCreateCommand": "bin/setup",
-  "waitFor": "postCreateCommand",
-
   "customizations": {
     "vscode": {
       "settings": {},
