@@ -4,9 +4,7 @@
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "18"
-    },
-    "ghcr.io/devcontainers/features/postgres:1": {},
-    "ghcr.io/devcontainers/features/redis:1": {}
+    }
   },
   "forwardPorts": [3000, 4000],
   "portsAttributes": {
@@ -21,7 +19,7 @@
       "requireLocalPort": true
     }
   },
-  "postCreateCommand": "apt-get update && apt-get install -y libpq-dev libicu-dev libidn11-dev libprotobuf-dev protobuf-compiler ffmpeg imagemagick libmagickwand-dev libmagic-dev libxml2-dev libxslt1-dev && bundle install && npm install -g yarn && yarn install",
+  "postCreateCommand": "apt-get update && apt-get install -y postgresql postgresql-contrib libpq-dev redis-server libicu-dev libidn11-dev libprotobuf-dev protobuf-compiler ffmpeg imagemagick libmagickwand-dev libmagic-dev libxml2-dev libxslt1-dev && bundle install && npm install -g yarn && yarn install",
   "remoteUser": "vscode",
   "otherPortsAttributes": {
     "onAutoForward": "silent"
